@@ -1,0 +1,13 @@
+# Never commit customer data, API keys, credentials or local execution state
+**/.env
+**/.env.*
+**/.rules-version.json
+**/__pycache__/
+**/.pytest_cache/
+*.pyc
+*.log
+*.xlsx
+*.xls
+local-data/
+exports/
+secrets/
