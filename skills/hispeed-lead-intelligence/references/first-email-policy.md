@@ -10,6 +10,7 @@ The draft is a researched reference for review, not authorization to send.
 - `evidence_used` with evidence IDs;
 - `reason_for_angle`;
 - any inference or claim requiring review.
+- the literal signature placeholder `Best regards, [SENDER NAME / ENTITY — TO BE CONFIRMED]` unless the current Run Brief supplies the approved sender identity.
 
 ## Leader-approved body sequence
 
@@ -27,10 +28,11 @@ End with one low-friction next step: confirm relevance, identify the correct own
 
 ## Style
 
-- Default body length: 80–130 English words unless the brief says otherwise.
+- Default body length: 80–130 English words unless the brief says otherwise. Count only the three body sections; exclude the salutation, subject lines, and signature placeholder.
 - Use clear business English and one concrete personalization signal.
 - Do not use fake `Re:`, false familiarity, clickbait, generic praise, or a product dump.
 - Do not add an attachment or a stack of links by default.
 - A subject may be interesting without making a claim the evidence cannot support.
+- Do not infer the sender name or entity from model memory, the Hispeed company name, or a previous run. When the Run Brief omits it, keep the placeholder and add `confirm sender signature` to downstream actions.
 
 

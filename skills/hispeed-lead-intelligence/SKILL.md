@@ -2,7 +2,7 @@
 name: hispeed-lead-intelligence
 description: Research and qualify evidence-backed industrial laser prospects for Hispeed Laser. Use when a task asks to find target companies, investigate company fit, identify decision-relevant contacts, assess email evidence, prioritize leads, or draft a researched first cold email for one specified market segment. Do not use for sending campaigns, monitoring replies, assigning sales owners, or later-stage follow-up sequences.
 metadata:
-  version: 1.0.0
+  version: 1.1.0
 ---
 
 # Hispeed Lead Intelligence
@@ -91,6 +91,8 @@ Use normalized company domain as the primary identity key, with legal name, coun
 
 Use [assets/run-report-template.md](assets/run-report-template.md). Report requested count and its basis, candidates reviewed, `QUALIFIED`, `REVIEW`, `REJECTED`, and `DUPLICATE` counts, research completeness, write status, unavailable capabilities, unresolved conflicts, and required human or downstream actions.
 
+Before delivery, reconcile the package rather than trusting a coordinator summary. Every delivered company that requires a draft must have the complete draft body, exactly three subject options, one recommended subject, evidence IDs, angle rationale, signature placeholder, and draft-presence check in the package. A reference such as “see subagent file” does not satisfy delivery.
+
 ## Completion criteria
 
 A run is complete only when every delivered company has:
@@ -102,6 +104,8 @@ A run is complete only when every delivered company has:
 - an explicit qualification status and rationale;
 - a structurally valid record matching [assets/company-record.schema.json](assets/company-record.schema.json);
 - a first-email draft only when requested and supported by sufficient evidence.
+- every completeness blocker and required downstream action recorded explicitly;
+- every requested draft present in full, not only summarized or referenced.
 
 Return fewer leads when the evidence bar is not met. Mark incomplete external writes or unavailable checks as `PARTIAL`; never report them as completed.
 

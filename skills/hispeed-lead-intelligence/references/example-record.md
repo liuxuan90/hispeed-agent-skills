@@ -6,7 +6,8 @@ This example demonstrates structure, not a real prospect.
 {
   "lead_id": "exampleco.com",
   "run_id": "example-run",
-  "skill_version": "1.0.0",
+  "skill_version": "1.1.0",
+  "schema_version": "v2",
   "company_identity": {
     "name": "Example Components Ltd.",
     "domain": "exampleco.com",
@@ -14,7 +15,9 @@ This example demonstrates structure, not a real prospect.
     "customer_type": "end_manufacturer"
   },
   "qualification_status": "REVIEW",
+  "qualification_band": "NOT_APPLICABLE",
   "research_completeness": "PARTIAL",
+  "completeness_blockers": ["Independent evidence remains incomplete", "No current primary contact was identified"],
   "write_status": "NOT_REQUESTED",
   "known_customer_list_state": "USER_CONFIRMED_NONE",
   "hard_gates": {
@@ -28,12 +31,14 @@ This example demonstrates structure, not a real prospect.
     "process_feasibility": "UNKNOWN",
     "independent_evidence": "UNKNOWN",
     "exclusions": "PASS",
+    "known_customer": "PASS",
     "negative_evidence_review": "PASS"
   },
   "company_fit": {
     "score_status": "NOT_SCORED",
     "score": null,
     "model_version": "v1",
+    "equipment_state": "UNKNOWN",
     "components": {
       "icp_match": null,
       "observable_need": null,
@@ -45,15 +50,21 @@ This example demonstrates structure, not a real prospect.
   },
   "peer_classification": "POTENTIAL_CUSTOMER",
   "contact_relevance": "UNKNOWN",
+  "contact_currency": "UNKNOWN",
   "email_confidence": "NOT_EVALUATED",
   "contacts": [
     {
       "name": null,
       "title": null,
       "contact_relevance": "UNKNOWN",
+      "role_evidence_date": null,
+      "contact_currency": "UNKNOWN",
+      "reverify_title_before_send": true,
       "relationship_source_ids": [],
       "email": null,
       "email_confidence": "NOT_EVALUATED",
+      "pattern_example_dates": [],
+      "email_reverify_required": false,
       "mx": "NOT_AVAILABLE",
       "smtp": "NOT_AVAILABLE",
       "catch_all": "NOT_AVAILABLE"

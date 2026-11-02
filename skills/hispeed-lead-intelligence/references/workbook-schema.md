@@ -4,11 +4,11 @@ Map these logical tables to the destination platform. Names and column order may
 
 ## 1. Run Brief
 
-`run_id`, skill version, scoring version, date, market, market-presence requirement, local language, industry/application, customer type, Hispeed focus, exclusions, known-customer-list state, target count, target count basis, destination, capability preflight, query summary.
+`run_id`, skill version, company-record schema version, scoring version, date, market, market-presence requirement, local language, industry/application, customer type, Hispeed focus, exclusions, known-customer-list state, target count, target count basis, approved sender identity, destination, capability preflight, query summary.
 
 ## 2. Lead Summary
 
-One row per company: `lead_id`, legal/display name, normalized domain, country, customer type, qualification status, Company Fit Score and score status, Contact Relevance, Email Confidence, peer classification, research completeness, write status, priority, core rationale, next review action, source coverage, last researched date.
+One row per company: `lead_id`, legal/display name, normalized domain, country, customer type, qualification status, qualification band, Company Fit Score and score status, equipment state, Contact Relevance, Contact Currency, Email Confidence, peer classification, research completeness, completeness blockers, write status, priority, core rationale, next review action, source coverage, last researched date.
 
 ## 3. Company Research
 
@@ -16,11 +16,11 @@ Company identity, operating evidence, products, materials, parts, manufacturing/
 
 ## 4. Contacts & Emails
 
-Person identity, title, role relevance, evidence, primary/backup status, email, discovery method, public source, pattern basis, email evidence level, MX/SMTP/Catch-all states, verification tool, verification time, and Snov.io follow-up status.
+Person identity, title, role relevance, role-evidence date, contact currency, reverify-title flag, evidence, primary/backup status, email, discovery method, public source, pattern basis, pattern-example dates, email evidence level, email-reverify flag, MX/SMTP/Catch-all states, verification tool, verification time, and Snov.io follow-up status.
 
 ## 5. Email Drafts
 
-Primary contact, three subjects, recommended subject, Personalized Problem, Show You Solve It, CTA, complete draft, evidence used, angle rationale, and review flags.
+Primary contact, three subjects, recommended subject, Personalized Problem, Show You Solve It, CTA, complete draft, approved signature or required placeholder, body word count, evidence used, angle rationale, review flags, and draft-presence check.
 
 ## 6. Rejected & Duplicates
 
@@ -41,7 +41,7 @@ Use normalized official domain as the primary key. Use legal name, country, comp
 - Update evidence and research timestamps on an existing record.
 - Preserve old and new values when sources conflict.
 - Preserve human scores, ownership, follow-up state, sales notes, and outcome labels unless the task explicitly authorizes their update.
-- Record `run_id`, skill version, scoring version, and update time.
+- Record `run_id`, skill version, company-record schema version, scoring version, and update time.
 - If mapping or permission is uncertain, return a standard package and set `write_status` to `PARTIAL` or `FAILED` without changing qualification status.
 
 Use [../assets/standalone-package-manifest.md](../assets/standalone-package-manifest.md) when no destination table is supplied.

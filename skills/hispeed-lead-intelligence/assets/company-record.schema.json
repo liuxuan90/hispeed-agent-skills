@@ -1,19 +1,23 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://hispeedlaser.com/schemas/lead-intelligence-company-record-v1.json",
+  "$id": "https://hispeedlaser.com/schemas/lead-intelligence-company-record-v2.json",
   "title": "Hispeed Lead Intelligence Company Record",
   "type": "object",
   "required": [
     "lead_id",
     "run_id",
     "skill_version",
+    "schema_version",
     "company_identity",
     "qualification_status",
+    "qualification_band",
     "research_completeness",
+    "completeness_blockers",
     "write_status",
     "hard_gates",
     "company_fit",
     "contact_relevance",
+    "contact_currency",
     "email_confidence",
     "facts",
     "inferences",
@@ -26,7 +30,8 @@
   "properties": {
     "lead_id": {"type": "string", "minLength": 1},
     "run_id": {"type": "string", "minLength": 1},
-    "skill_version": {"type": "string", "const": "1.0.0"},
+    "skill_version": {"type": "string", "const": "1.1.0"},
+    "schema_version": {"type": "string", "const": "v2"},
     "company_identity": {
       "type": "object",
       "required": ["name", "domain", "country", "customer_type"],
@@ -41,13 +46,15 @@
       "additionalProperties": true
     },
     "qualification_status": {"enum": ["QUALIFIED", "REVIEW", "REJECTED", "DUPLICATE"]},
+    "qualification_band": {"enum": ["STANDARD", "BORDERLINE", "NOT_APPLICABLE"]},
     "research_completeness": {"enum": ["COMPLETE", "PARTIAL"]},
+    "completeness_blockers": {"type": "array", "items": {"type": "string"}},
     "write_status": {"enum": ["NOT_REQUESTED", "NOT_ATTEMPTED", "WRITTEN", "PARTIAL", "FAILED"]},
     "peer_classification": {"enum": ["DIRECT_COMPETITOR", "POTENTIAL_CUSTOMER", "CHANNEL_PARTNER", "OEM_ODM_OPPORTUNITY", "SYSTEM_INTEGRATION_PARTNER", "HYBRID_REVIEW", "INSUFFICIENT_EVIDENCE"]},
     "known_customer_list_state": {"enum": ["PROVIDED_AND_CHECKED", "USER_CONFIRMED_NONE", "NOT_PROVIDED"]},
     "hard_gates": {
       "type": "object",
-      "required": ["identity", "operating_status", "market", "industry", "customer_type", "observable_activity", "hispeed_fit", "process_feasibility", "independent_evidence", "exclusions", "negative_evidence_review"],
+      "required": ["identity", "operating_status", "market", "industry", "customer_type", "observable_activity", "hispeed_fit", "process_feasibility", "independent_evidence", "exclusions", "known_customer", "negative_evidence_review"],
       "properties": {
         "identity": {"enum": ["PASS", "FAIL", "UNKNOWN"]},
         "operating_status": {"enum": ["PASS", "FAIL", "UNKNOWN"]},
@@ -59,17 +66,19 @@
         "process_feasibility": {"enum": ["PASS", "FAIL", "UNKNOWN"]},
         "independent_evidence": {"enum": ["PASS", "FAIL", "UNKNOWN"]},
         "exclusions": {"enum": ["PASS", "FAIL", "UNKNOWN"]},
+        "known_customer": {"enum": ["PASS", "FAIL", "UNKNOWN"]},
         "negative_evidence_review": {"enum": ["PASS", "FAIL", "UNKNOWN"]}
       },
       "additionalProperties": false
     },
     "company_fit": {
       "type": "object",
-      "required": ["score_status", "score", "model_version", "components", "rationale"],
+      "required": ["score_status", "score", "model_version", "equipment_state", "components", "rationale"],
       "properties": {
         "score_status": {"enum": ["SCORED", "NOT_SCORED"]},
         "score": {"type": ["number", "null"], "minimum": 0, "maximum": 100},
         "model_version": {"type": "string", "const": "v1"},
+        "equipment_state": {"enum": ["ALREADY_EQUIPPED", "NOT_EVIDENCED", "UNKNOWN"]},
         "components": {
           "type": "object",
           "required": ["icp_match", "observable_need", "hispeed_fit", "evidence_quality", "personalization_signal"],
@@ -87,20 +96,26 @@
       "additionalProperties": false
     },
     "contact_relevance": {"enum": ["HIGH", "MEDIUM", "LOW", "UNKNOWN"]},
+    "contact_currency": {"enum": ["CURRENT", "AGING", "STALE", "CONFLICT", "UNKNOWN"]},
     "email_confidence": {"enum": ["NOT_EVALUATED", "E0", "E1", "E2", "E3", "E4", "E5"]},
     "contacts": {
       "type": "array",
       "maxItems": 2,
       "items": {
         "type": "object",
-        "required": ["name", "title", "contact_relevance", "relationship_source_ids", "email_confidence"],
+        "required": ["name", "title", "contact_relevance", "role_evidence_date", "contact_currency", "reverify_title_before_send", "relationship_source_ids", "email_confidence", "pattern_example_dates", "email_reverify_required"],
         "properties": {
           "name": {"type": ["string", "null"]},
           "title": {"type": ["string", "null"]},
           "contact_relevance": {"enum": ["HIGH", "MEDIUM", "LOW", "UNKNOWN"]},
+          "role_evidence_date": {"type": ["string", "null"], "format": "date"},
+          "contact_currency": {"enum": ["CURRENT", "AGING", "STALE", "CONFLICT", "UNKNOWN"]},
+          "reverify_title_before_send": {"type": "boolean"},
           "relationship_source_ids": {"type": "array", "items": {"type": "string"}},
           "email": {"type": ["string", "null"]},
           "email_confidence": {"enum": ["NOT_EVALUATED", "E0", "E1", "E2", "E3", "E4", "E5"]},
+          "pattern_example_dates": {"type": "array", "items": {"type": ["string", "null"], "format": "date"}},
+          "email_reverify_required": {"type": "boolean"},
           "mx": {"enum": ["PASS", "FAIL", "UNKNOWN", "NOT_AVAILABLE"]},
           "smtp": {"enum": ["PASS", "FAIL", "UNKNOWN", "NOT_AVAILABLE"]},
           "catch_all": {"enum": ["YES", "NO", "UNKNOWN", "NOT_AVAILABLE"]}
@@ -165,8 +180,10 @@
         "body": {"type": "string"},
         "evidence_used": {"type": "array", "items": {"type": "string"}},
         "reason_for_angle": {"type": "string"}
+        ,"signature": {"type": "string", "minLength": 1}
+        ,"body_word_count": {"type": "integer", "minimum": 0}
       },
-      "required": ["subject_options", "recommended_subject", "personalized_problem", "show_you_solve_it", "cta", "body", "evidence_used", "reason_for_angle"],
+      "required": ["subject_options", "recommended_subject", "personalized_problem", "show_you_solve_it", "cta", "body", "signature", "body_word_count", "evidence_used", "reason_for_angle"],
       "additionalProperties": false
     },
     "deduplication": {

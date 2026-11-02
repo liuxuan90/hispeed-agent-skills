@@ -18,6 +18,7 @@
 - Destination table or standalone package:
 - Authorized historical feedback source:
 - Email draft required: yes / no
+- Approved sender name / entity, or `NOT_PROVIDED`:
 - Technical email checks authorized and available:
 - Additional compliance or access constraints:
 

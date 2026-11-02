@@ -5,7 +5,7 @@
 This repository houses reusable agent skills for Hispeed Laser:
 
 - [`hispeed-global-leads-research`](skills/hispeed-global-leads-research/SKILL.md) — evidence-based overseas B2B prospect discovery, company qualification, public contact research, personalized English **drafts**, and structured handoff.
-- [`hispeed-lead-intelligence`](skills/hispeed-lead-intelligence/SKILL.md) — the evidence-gated, reusable lead-intelligence workflow approved for controlled pilots. It keeps company fit, contact relevance, and email confidence separate; classifies laser-industry peers as possible customers, channels, OEM/ODM partners, integrators, competitors, or review cases; and prepares one evidence-constrained first-email draft per deliverable company.
+- [`hispeed-lead-intelligence`](skills/hispeed-lead-intelligence/SKILL.md) — the v1.1.0 evidence-gated lead-intelligence workflow. It keeps company fit, contact relevance, contact currency, and email confidence separate; classifies laser-industry peers as possible customers, channels, OEM/ODM partners, integrators, competitors, or review cases; and prepares one evidence-constrained first-email draft per deliverable company. Company records use schema v2 while scoring weights remain model v1.
 
 ## Scope
 

@@ -27,6 +27,8 @@ Look for automation engineering, machine vision, PLC/MES integration, conveyors,
 
 ### End manufacturer
 
+An end manufacturer operates the production line that makes the target part. This includes a contract manufacturer or CDMO manufacturing to an OEM customer's specification; owning the end-product brand is not required. A distributor, trader, reseller, design-only firm, or company that only specifies production performed by others is not an end manufacturer. If a run requires own-brand ownership, state that as an additional Run Brief exclusion rather than reinterpreting this customer type.
+
 Look for actual parts, materials, lines, traceability, coding, marking, welding, cleaning, precision, throughput, quality, expansion, or automation needs.
 
 ## Peer classification
@@ -56,10 +58,11 @@ Record `PASS`, `FAIL`, or `UNKNOWN` for:
 7. defensible Hispeed process, product, or cooperation fit;
 8. process feasibility evidence or an explicit `sample_test_required` conclusion;
 9. at least two independent sources, not both `S5`;
-10. exclusion and known-customer check;
-11. material negative-evidence review.
+10. user-specified exclusion check;
+11. known-customer or existing-lead check;
+12. material negative-evidence review.
 
-The known-customer check passes only when a list was provided and checked, or the user explicitly confirmed that no list exists. Otherwise it remains `UNKNOWN`.
+The `known_customer` gate is separate from `exclusions`. It is `PASS` only when a list was provided and checked (`PROVIDED_AND_CHECKED`) or the user explicitly confirmed no list exists (`USER_CONFIRMED_NONE`). It is `UNKNOWN` when the list state is `NOT_PROVIDED`, which blocks `QUALIFIED` and routes the company to `REVIEW`. It is `FAIL` when the company is a confirmed existing customer, do-not-contact record, or otherwise blocked under the supplied list.
 
 Use `REJECTED` for confirmed gate failure. Use `REVIEW` when a potentially good company has material, recoverable unknowns. Do not manufacture a pass to reach quota.
 
@@ -77,6 +80,8 @@ Score gated candidates only:
 
 Store each component, evidence IDs, and rationale. Do not assign a score from impression alone.
 
+Already owning laser marking equipment is not a fit penalty or disqualifier. Score the process relevance: part, material family when known, traceability need, line-integration plausibility, and application evidence. Record equipment state as `ALREADY_EQUIPPED` and use an additional-capacity, replacement, line-specific, alternative-wavelength, automation, or sample-validation angle. Never describe an equipped company as a greenfield need.
+
 ## Statuses
 
 - `QUALIFIED`: 75–100 and all required hard gates pass;
@@ -84,10 +89,14 @@ Store each component, evidence IDs, and rationale. Do not assign a score from im
 - `REJECTED`: below 60 after scoring, or confirmed hard-gate failure;
 - `DUPLICATE`: already represented by the same company identity;
 
+For a score of 75–79, keep status `QUALIFIED` and set `qualification_band` to `BORDERLINE`. Its priority cannot exceed any 80+ qualified company in the same batch, and `next_action` must identify the weakest evidence point. Use `STANDARD` for other qualified scores and `NOT_APPLICABLE` for non-qualified statuses.
+
 Track operational state separately:
 
 - `research_completeness`: `COMPLETE` or `PARTIAL`;
 - `write_status`: `NOT_REQUESTED`, `NOT_ATTEMPTED`, `WRITTEN`, `PARTIAL`, or `FAILED`.
+
+Set `research_completeness` to `COMPLETE` only when all qualification gates pass; consequential claims meet the evidence standard; all requested company, contact, and email research has been executed; contact currency is current enough for the run; and process feasibility is evidenced or `sample_test_required` lists the missing material, color, additive, surface, content, and cycle-time parameters. An honest `E0` after completed email research does not itself force `PARTIAL`; `NOT_EVALUATED`, stale or conflicting primary-contact evidence, missing required evidence, or any unresolved item that could change qualification does. Record every reason in `completeness_blockers` and the next action.
 
 If required gates do not all pass, set score status to `NOT_SCORED`, score to `null`, and record the reason.
 

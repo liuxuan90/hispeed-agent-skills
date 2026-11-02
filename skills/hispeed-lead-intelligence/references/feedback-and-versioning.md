@@ -31,4 +31,22 @@ Treat `NO_REPLY` as neutral unless delivery, contact correctness, observation pe
 
 The agent may produce an `Optimization Proposal`; a human approves the next rule or scoring version.
 
+## Accepted rule release: skill v1.1.0 / schema v2
+
+Source observation: one 2026-11-02 USA industrial-plastics end-manufacturer run reported 21 reviewed candidates. This sample is below the 30 human-reviewed-lead threshold and is recorded as an observation, not a calibrated weight or threshold change. The underlying 21 records were not independently re-adjudicated during rule maintenance.
+
+Accepted consistency fixes:
+
+- contract manufacturers and CDMOs operating the production line count as end manufacturers unless the Run Brief explicitly requires own-brand ownership;
+- `research_completeness` has explicit criteria and blocker reporting;
+- the known-customer gate is independent from general exclusions;
+- contact relevance and contact currency are separate conclusions;
+- email pattern evidence records dates and domain-lifecycle risk;
+- first drafts use an approved sender or a literal signature placeholder;
+- already-equipped prospects remain scorable with a non-greenfield angle;
+- scores 75–79 retain `QUALIFIED` with a `BORDERLINE` band and priority constraint;
+- delivery packages verify complete draft presence rather than relying on summaries.
+
+Scoring model v1 weights and the 75-point qualification threshold remain unchanged.
+
 

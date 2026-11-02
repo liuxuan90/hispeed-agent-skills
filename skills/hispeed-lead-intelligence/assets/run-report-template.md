@@ -2,6 +2,7 @@
 
 - Run ID:
 - Skill version:
+- Company-record schema version:
 - Scoring model version:
 - Research date:
 - Requested count:
@@ -21,6 +22,9 @@
 - Material evidence conflicts:
 - Human review required:
 - Downstream verification required:
+- Confirm sender signature required:
+- Draft presence check passed / failed:
+- Completeness blockers summary:
 - Quantity shortfall and reason:
 - Optimization observations:
 
