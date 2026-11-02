@@ -2,9 +2,10 @@
 
 **Private skill source for Hispeed Laser (Dongguan Hispeed Laser Technology Co., Ltd.) marketing team.**
 
-This repository is intended to house multiple reusable agent skills. Only one skill is included in this initial release:
+This repository houses reusable agent skills for Hispeed Laser:
 
 - [`hispeed-global-leads-research`](skills/hispeed-global-leads-research/SKILL.md) — evidence-based overseas B2B prospect discovery, company qualification, public contact research, personalized English **drafts**, and structured handoff.
+- [`hispeed-lead-intelligence`](skills/hispeed-lead-intelligence/SKILL.md) — the evidence-gated, reusable lead-intelligence workflow approved for controlled pilots. It keeps company fit, contact relevance, and email confidence separate; classifies laser-industry peers as possible customers, channels, OEM/ODM partners, integrators, competitors, or review cases; and prepares one evidence-constrained first-email draft per deliverable company.
 
 ## Scope
 
@@ -19,14 +20,19 @@ hispeed-agent-skills/
 ├── README.md
 ├── .gitignore
 ├── docs/RELEASE_PROCESS.md
-└── skills/hispeed-global-leads-research/
+├── skills/hispeed-global-leads-research/
     ├── SKILL.md                    # fixed entrypoint & safety limits
     ├── references/*.md             # auto-refreshable reviewed research rules
     ├── rules-manifest.json         # SHA-256 hashes and rules version
     ├── config/update.json          # source repository and stable ref
     ├── scripts/update_rules.py     # trusted local updater only
     ├── assets/sheets/*.csv         # four-sheet schema
-    └── tests/test_updater.py
+│   └── tests/test_updater.py
+└── skills/hispeed-lead-intelligence/
+    ├── SKILL.md                    # current approved lead-intelligence entrypoint
+    ├── agents/openai.yaml          # Codex interface metadata
+    ├── references/*.md             # evidence, scoring, contact and email policies
+    └── assets/*                    # run templates, schema and package manifest
 ```
 
 ## Install and update

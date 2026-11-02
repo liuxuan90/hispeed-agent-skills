@@ -1,0 +1,5 @@
+interface:
+  display_name: "Hispeed Lead Intelligence"
+  short_description: "Research and qualify evidence-backed industrial laser leads"
+  default_prompt: "Use $hispeed-lead-intelligence to research and qualify leads for the supplied market brief."
+

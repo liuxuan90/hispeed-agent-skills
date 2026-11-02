@@ -1,0 +1,188 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://hispeedlaser.com/schemas/lead-intelligence-company-record-v1.json",
+  "title": "Hispeed Lead Intelligence Company Record",
+  "type": "object",
+  "required": [
+    "lead_id",
+    "run_id",
+    "skill_version",
+    "company_identity",
+    "qualification_status",
+    "research_completeness",
+    "write_status",
+    "hard_gates",
+    "company_fit",
+    "contact_relevance",
+    "email_confidence",
+    "facts",
+    "inferences",
+    "unknowns",
+    "negative_evidence",
+    "sources",
+    "deduplication",
+    "researched_at"
+  ],
+  "properties": {
+    "lead_id": {"type": "string", "minLength": 1},
+    "run_id": {"type": "string", "minLength": 1},
+    "skill_version": {"type": "string", "const": "1.0.0"},
+    "company_identity": {
+      "type": "object",
+      "required": ["name", "domain", "country", "customer_type"],
+      "properties": {
+        "name": {"type": "string", "minLength": 1},
+        "legal_name": {"type": ["string", "null"]},
+        "domain": {"type": "string", "minLength": 1},
+        "country": {"type": "string", "minLength": 1},
+        "customer_type": {"enum": ["distributor", "system_integrator", "end_manufacturer"]},
+        "company_linkedin": {"type": ["string", "null"], "format": "uri"}
+      },
+      "additionalProperties": true
+    },
+    "qualification_status": {"enum": ["QUALIFIED", "REVIEW", "REJECTED", "DUPLICATE"]},
+    "research_completeness": {"enum": ["COMPLETE", "PARTIAL"]},
+    "write_status": {"enum": ["NOT_REQUESTED", "NOT_ATTEMPTED", "WRITTEN", "PARTIAL", "FAILED"]},
+    "peer_classification": {"enum": ["DIRECT_COMPETITOR", "POTENTIAL_CUSTOMER", "CHANNEL_PARTNER", "OEM_ODM_OPPORTUNITY", "SYSTEM_INTEGRATION_PARTNER", "HYBRID_REVIEW", "INSUFFICIENT_EVIDENCE"]},
+    "known_customer_list_state": {"enum": ["PROVIDED_AND_CHECKED", "USER_CONFIRMED_NONE", "NOT_PROVIDED"]},
+    "hard_gates": {
+      "type": "object",
+      "required": ["identity", "operating_status", "market", "industry", "customer_type", "observable_activity", "hispeed_fit", "process_feasibility", "independent_evidence", "exclusions", "negative_evidence_review"],
+      "properties": {
+        "identity": {"enum": ["PASS", "FAIL", "UNKNOWN"]},
+        "operating_status": {"enum": ["PASS", "FAIL", "UNKNOWN"]},
+        "market": {"enum": ["PASS", "FAIL", "UNKNOWN"]},
+        "industry": {"enum": ["PASS", "FAIL", "UNKNOWN"]},
+        "customer_type": {"enum": ["PASS", "FAIL", "UNKNOWN"]},
+        "observable_activity": {"enum": ["PASS", "FAIL", "UNKNOWN"]},
+        "hispeed_fit": {"enum": ["PASS", "FAIL", "UNKNOWN"]},
+        "process_feasibility": {"enum": ["PASS", "FAIL", "UNKNOWN"]},
+        "independent_evidence": {"enum": ["PASS", "FAIL", "UNKNOWN"]},
+        "exclusions": {"enum": ["PASS", "FAIL", "UNKNOWN"]},
+        "negative_evidence_review": {"enum": ["PASS", "FAIL", "UNKNOWN"]}
+      },
+      "additionalProperties": false
+    },
+    "company_fit": {
+      "type": "object",
+      "required": ["score_status", "score", "model_version", "components", "rationale"],
+      "properties": {
+        "score_status": {"enum": ["SCORED", "NOT_SCORED"]},
+        "score": {"type": ["number", "null"], "minimum": 0, "maximum": 100},
+        "model_version": {"type": "string", "const": "v1"},
+        "components": {
+          "type": "object",
+          "required": ["icp_match", "observable_need", "hispeed_fit", "evidence_quality", "personalization_signal"],
+          "properties": {
+            "icp_match": {"type": ["number", "null"], "minimum": 0, "maximum": 25},
+            "observable_need": {"type": ["number", "null"], "minimum": 0, "maximum": 30},
+            "hispeed_fit": {"type": ["number", "null"], "minimum": 0, "maximum": 25},
+            "evidence_quality": {"type": ["number", "null"], "minimum": 0, "maximum": 15},
+            "personalization_signal": {"type": ["number", "null"], "minimum": 0, "maximum": 5}
+          },
+          "additionalProperties": false
+        },
+        "rationale": {"type": "string"}
+      },
+      "additionalProperties": false
+    },
+    "contact_relevance": {"enum": ["HIGH", "MEDIUM", "LOW", "UNKNOWN"]},
+    "email_confidence": {"enum": ["NOT_EVALUATED", "E0", "E1", "E2", "E3", "E4", "E5"]},
+    "contacts": {
+      "type": "array",
+      "maxItems": 2,
+      "items": {
+        "type": "object",
+        "required": ["name", "title", "contact_relevance", "relationship_source_ids", "email_confidence"],
+        "properties": {
+          "name": {"type": ["string", "null"]},
+          "title": {"type": ["string", "null"]},
+          "contact_relevance": {"enum": ["HIGH", "MEDIUM", "LOW", "UNKNOWN"]},
+          "relationship_source_ids": {"type": "array", "items": {"type": "string"}},
+          "email": {"type": ["string", "null"]},
+          "email_confidence": {"enum": ["NOT_EVALUATED", "E0", "E1", "E2", "E3", "E4", "E5"]},
+          "mx": {"enum": ["PASS", "FAIL", "UNKNOWN", "NOT_AVAILABLE"]},
+          "smtp": {"enum": ["PASS", "FAIL", "UNKNOWN", "NOT_AVAILABLE"]},
+          "catch_all": {"enum": ["YES", "NO", "UNKNOWN", "NOT_AVAILABLE"]}
+        },
+        "additionalProperties": true
+      }
+    },
+    "facts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "statement", "source_ids"],
+        "properties": {
+          "id": {"type": "string"},
+          "statement": {"type": "string"},
+          "source_ids": {"type": "array", "minItems": 1, "items": {"type": "string"}}
+        },
+        "additionalProperties": false
+      }
+    },
+    "inferences": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "statement", "supports", "confidence"],
+        "properties": {
+          "id": {"type": "string"},
+          "statement": {"type": "string"},
+          "supports": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+          "confidence": {"enum": ["HIGH", "MEDIUM", "LOW"]}
+        },
+        "additionalProperties": true
+      }
+    },
+    "unknowns": {"type": "array", "items": {"type": "string"}},
+    "negative_evidence": {"type": "array", "items": {"type": "object"}},
+    "sources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "url", "title", "excerpt_or_paraphrase", "source_tier", "accessed_at"],
+        "properties": {
+          "id": {"type": "string"},
+          "url": {"type": "string", "format": "uri"},
+          "title": {"type": "string"},
+          "excerpt_or_paraphrase": {"type": "string"},
+          "source_tier": {"enum": ["S1", "S2", "S3", "S4", "S5"]},
+          "published_at": {"type": ["string", "null"]},
+          "accessed_at": {"type": "string", "format": "date"}
+        },
+        "additionalProperties": false
+      }
+    },
+    "email_draft": {
+      "type": ["object", "null"],
+      "properties": {
+        "subject_options": {"type": "array", "minItems": 3, "maxItems": 3, "items": {"type": "string"}},
+        "recommended_subject": {"type": "string"},
+        "personalized_problem": {"type": "string"},
+        "show_you_solve_it": {"type": "string"},
+        "cta": {"type": "string"},
+        "body": {"type": "string"},
+        "evidence_used": {"type": "array", "items": {"type": "string"}},
+        "reason_for_angle": {"type": "string"}
+      },
+      "required": ["subject_options", "recommended_subject", "personalized_problem", "show_you_solve_it", "cta", "body", "evidence_used", "reason_for_angle"],
+      "additionalProperties": false
+    },
+    "deduplication": {
+      "type": "object",
+      "required": ["normalized_domain", "result", "known_customer_list_state"],
+      "properties": {
+        "normalized_domain": {"type": "string"},
+        "result": {"enum": ["NEW", "EXISTING", "CONFLICT", "UNKNOWN"]},
+        "known_customer_list_state": {"enum": ["PROVIDED_AND_CHECKED", "USER_CONFIRMED_NONE", "NOT_PROVIDED"]},
+        "matched_lead_id": {"type": ["string", "null"]}
+      },
+      "additionalProperties": true
+    },
+    "next_action": {"type": ["string", "null"]},
+    "researched_at": {"type": "string", "format": "date-time"}
+  },
+  "additionalProperties": true
+}
+
