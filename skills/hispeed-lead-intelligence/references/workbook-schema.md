@@ -1,49 +1,110 @@
-# Workbook schema and write rules
+# 表格结构与安全写入规则
 
-Map these logical tables to the destination platform. Names and column order may adapt; field meaning and identity rules remain stable.
+将以下逻辑表映射到目标平台。字段含义、企业身份键和规范状态码保持稳定；用户可见的 Excel、在线表格、CSV 预览及表格式报告默认使用简体中文。
 
-## 1. Run Brief
+## 中文展示规则
 
-`run_id`, skill version, company-record schema version, scoring version, date, market, market-presence requirement, local language, industry/application, customer type, Hispeed focus, exclusions, known-customer-list state, target count, target count basis, approved sender identity, destination, capability preflight, query summary.
+- 工作表名称、表格标题、分区标题、列标题、评分理由、阻塞项、淘汰理由、下一步建议和运行总结使用中文。
+- 公司法定名称、品牌名、联系人姓名、职位原文、邮箱、域名、网址、产品型号、技术术语、证据引文和来源标题保持原文；需要解释时另加中文说明列，不篡改原文。
+- 第一封开发信的主题和正文默认保持英文。其证据说明、角度理由、复核标记和字数等管理字段使用中文。
+- 机器可读 JSON 继续使用 `company-record.schema.json` 的英文键名及规范代码。中文表格是展示映射，不得把中文列名写回为新的 JSON 字段。
+- 当目标表已经有固定列名时，先读取并建立映射；不得为了中文化覆盖人工字段或破坏下游公式。
+- 用户明确指定其他语言时，可以替换用户可见标签；规范代码和底层字段含义不变。
 
-## 2. Lead Summary
+## 规范状态的中文显示
 
-One row per company: `lead_id`, legal/display name, normalized domain, country, customer type, qualification status, qualification band, Company Fit Score and score status, equipment state, Contact Relevance, Contact Currency, Email Confidence, peer classification, research completeness, completeness blockers, write status, priority, core rationale, next review action, source coverage, last researched date.
+在可见表格中使用中文，同时保留规范代码以便筛选，例如 `合格（QUALIFIED）`。
 
-## 3. Company Research
+| 规范代码 | 中文显示 |
+| --- | --- |
+| `QUALIFIED` | 合格 |
+| `REVIEW` | 待复核 |
+| `REJECTED` | 淘汰 |
+| `DUPLICATE` | 重复 |
+| `PASS` | 通过 |
+| `FAIL` | 不通过 |
+| `UNKNOWN` | 未知 |
+| `COMPLETE` | 完整 |
+| `PARTIAL` | 部分完成 |
+| `FAILED` | 失败 |
+| `NOT_AVAILABLE` | 不可用 |
 
-Company identity, operating evidence, products, materials, parts, manufacturing/integration/channel activity, trigger signals, Hispeed fit, hard-gate decisions, facts, inferences, unknowns, negative evidence, score components, and sources.
+邮箱证据等级保留 `E0–E5` 代码，并在相邻列或同一单元格补充中文含义，不得用虚构百分比代替。
 
-## 4. Contacts & Emails
+## 1. 批次说明
 
-Person identity, title, role relevance, role-evidence date, contact currency, reverify-title flag, evidence, primary/backup status, email, discovery method, public source, pattern basis, pattern-example dates, email evidence level, email-reverify flag, MX/SMTP/Catch-all states, verification tool, verification time, and Snov.io follow-up status.
+推荐工作表名：`批次说明`
 
-## 5. Email Drafts
+推荐中文字段：`批次编号`、`Skill版本`、`企业记录结构版本`、`评分模型版本`、`研究日期`、`目标国家或市场`、`市场存在要求`、`当地语言`、`细分行业或应用`、`客户类型`、`Hispeed产品或工艺重点`、`排除条件`、`历史客户名单状态`、`目标数量`、`目标数量口径`、`发件人身份`、`写入目标`、`工具能力预检`、`搜索词摘要`、`表格语言`、`邮件语言`。
 
-Primary contact, three subjects, recommended subject, Personalized Problem, Show You Solve It, CTA, complete draft, approved signature or required placeholder, body word count, evidence used, angle rationale, review flags, and draft-presence check.
+## 2. 客户汇总
 
-## 6. Rejected & Duplicates
+推荐工作表名：`客户汇总`
 
-Candidate identity, status, rejection or duplicate reason, matched existing lead, evidence, run ID, and review date.
+每家公司一行。推荐中文表头：
 
-## Optional 7. Optimization Feedback
+`客户编号`、`公司名称`、`法定名称`、`官网域名`、`官网网址`、`国家/地区`、`客户类型`、`资格状态`、`资格分段`、`业务匹配评分`、`评分状态`、`设备状态`、`联系人相关性`、`联系人时效`、`邮箱可信度`、`同行分类`、`研究完整度`、`完整度阻塞项`、`写入状态`、`开发优先级`、`核心判断理由`、`下一步复核建议`、`证据覆盖情况`、`最后研究日期`。
 
-Human validation and downstream outcome labels. Do not add sales follow-up tasks here; that belongs to a separate follow-up workflow.
+## 3. 企业背调
 
-## Identity and deduplication
+推荐工作表名：`企业背调`
 
-Use normalized official domain as the primary key. Use legal name, country, company LinkedIn, and registry identity as secondary signals. A contact uses a professional profile URL or person name plus company domain; email alone is not sufficient identity.
+推荐中文表头：
 
-## Idempotent writes
+`客户编号`、`公司名称`、`企业身份信息`、`经营状态证据`、`主要产品`、`材料`、`零部件/工件`、`制造/集成/渠道活动`、`触发信号`、`Hispeed匹配机会`、`硬门槛结论`、`事实`、`推断`、`未知信息`、`反面证据`、`评分明细`、`样品测试要求`、`来源编号`、`来源网址`、`来源等级`、`发布日期`、`访问日期`。
 
-- Read the destination before writing.
-- Add a new company only when no identity match exists.
-- Update evidence and research timestamps on an existing record.
-- Preserve old and new values when sources conflict.
-- Preserve human scores, ownership, follow-up state, sales notes, and outcome labels unless the task explicitly authorizes their update.
-- Record `run_id`, skill version, company-record schema version, scoring version, and update time.
-- If mapping or permission is uncertain, return a standard package and set `write_status` to `PARTIAL` or `FAILED` without changing qualification status.
+事实、推断和未知必须分列，不能只翻译成一段无法追溯的中文总结。
 
-Use [../assets/standalone-package-manifest.md](../assets/standalone-package-manifest.md) when no destination table is supplied.
+## 4. 联系人与邮箱
 
+推荐工作表名：`联系人与邮箱`
 
+推荐中文表头：
+
+`客户编号`、`公司名称`、`联系人姓名`、`职位原文`、`角色中文说明`、`角色相关性`、`职位证据日期`、`联系人时效`、`发送前需复核职位`、`联系人证据`、`联系人类型`、`工作邮箱`、`邮箱发现方式`、`公开来源`、`企业域名匹配`、`邮箱格式依据`、`格式样例日期`、`邮箱证据等级`、`邮箱需复核`、`MX状态`、`SMTP状态`、`Catch-all状态`、`验证工具`、`验证时间`、`Snov.io后续状态`。
+
+邮箱、职位原文和证据原文保持原样；判断和解释用中文。
+
+## 5. 开发信草稿
+
+推荐工作表名：`开发信草稿`
+
+推荐中文表头：
+
+`客户编号`、`公司名称`、`主要联系人`、`主题选项1`、`主题选项2`、`主题选项3`、`推荐主题`、`个性化问题`、`解决思路`、`行动号召`、`完整英文邮件`、`发件人签名状态`、`正文字数`、`使用的证据`、`选用该角度的理由`、`复核标记`、`草稿完整性检查`。
+
+主题选项和邮件正文默认使用英文；管理、审核和解释字段使用中文。
+
+## 6. 淘汰与重复
+
+推荐工作表名：`淘汰与重复`
+
+推荐中文表头：
+
+`候选客户编号`、`公司名称`、`官网域名`、`处理状态`、`淘汰或重复原因`、`匹配到的现有客户`、`判断证据`、`批次编号`、`复核日期`。
+
+## 可选 7. 优化反馈
+
+推荐工作表名：`优化反馈`
+
+记录人工复核和后续结果标签。推荐中文表头：
+
+`客户编号`、`人工复核结论`、`结论标签`、`证据质量反馈`、`业务匹配反馈`、`联系人反馈`、`邮箱反馈`、`邮件角度反馈`、`实际结果`、`归因可信度`、`复核人`、`复核日期`、`优化建议`。
+
+不要在本表添加销售跟进任务；销售跟进属于独立流程。
+
+## 身份与去重
+
+以规范化官网域名作为企业主键；法定名称、国家、企业 LinkedIn 和登记身份作为辅助信号。联系人以职业资料网址，或“姓名＋企业域名”识别；邮箱不能单独作为人员身份。
+
+## 幂等写入
+
+- 写入前先读取目标表。
+- 仅在不存在身份匹配时新增公司。
+- 已有记录只更新证据和研究时间。
+- 来源冲突时同时保留新旧值。
+- 除非任务明确授权，保留人工评分、负责人、跟进状态、销售备注和结果标签。
+- 记录批次编号、Skill版本、企业记录结构版本、评分模型版本和更新时间。
+- 字段映射或权限不明确时，返回标准数据包，将写入状态设为 `部分完成（PARTIAL）` 或 `失败（FAILED）`，不得改变资格状态。
+
+未提供目标在线表格时，使用 [../assets/standalone-package-manifest.md](../assets/standalone-package-manifest.md)。

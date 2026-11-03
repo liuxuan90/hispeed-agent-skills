@@ -2,7 +2,7 @@
 name: hispeed-lead-intelligence
 description: Research and qualify evidence-backed industrial laser prospects for Hispeed Laser, or check and update this installed Skill from its reviewed stable release. Use for company discovery, fit investigation, decision-relevant contacts, email evidence, prioritization, researched first-email drafts, and explicit Skill maintenance requests. Do not use for sending campaigns, monitoring replies, assigning sales owners, or later-stage follow-up sequences.
 metadata:
-  version: 1.2.3
+  version: 1.3.0
 ---
 
 # Hispeed Lead Intelligence
@@ -20,7 +20,7 @@ Require these inputs before discovery:
 - target count;
 - target count basis: candidates reviewed or qualified companies delivered;
 - exclusions and known-customer list;
-- output language;
+- output language; default the user-facing workbook/table package to Simplified Chinese unless the run brief explicitly requests another language;
 - destination table or an explicit request for a standalone data package.
 
 Use [assets/run-brief-template.md](assets/run-brief-template.md). Ask only for missing decisions; find public facts yourself. Never broaden the segment to meet the requested count.
@@ -97,6 +97,8 @@ Ground the problem in evidence and use exploratory language for inference. Produ
 ### 8. Deduplicate and write safely
 
 Use normalized company domain as the primary identity key, with legal name, country, and company LinkedIn as secondary signals. Update an existing record rather than duplicating it. Preserve human scores, sales ownership, follow-up status, notes, and conflicting values. If destination access or schema mapping is uncertain, return a standard data package instead of guessing a write.
+
+For Excel, online spreadsheets, CSV previews, and table-style reports, follow the Chinese presentation mapping in [references/workbook-schema.md](references/workbook-schema.md). By default, use Chinese worksheet names, titles, column headers, status explanations, rationales, blockers, and next actions. Preserve company and person names, emails, URLs, evidence quotations, product/model names, and the English first-email draft in their source language. Keep canonical English JSON keys and status codes in machine-readable records when downstream automation depends on them.
 
 ### 9. Report the run
 

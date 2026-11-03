@@ -35,11 +35,11 @@ payload = {
     "source_repo": "liuxuan90/hispeed-agent-skills",
     "source_ref": "stable",
     "source_path": "skills/hispeed-lead-intelligence",
-    "change_types": ["scripts", "workflow", "packaging"],
-    "review_before_update": True,
+    "change_types": ["rules", "output-format"],
+    "review_before_update": False,
     "release_notes": [
-        "Use the correct GitHub API media type when resolving the immutable stable commit.",
-        "Retain cache-race protection, legacy migration, rollback, and unchanged business rules."
+        "Default user-facing workbook and table presentation to Simplified Chinese.",
+        "Keep canonical JSON keys, scoring model v1, schema v2 meaning, evidence text, identities, URLs, and English email drafts unchanged."
     ],
     "files": files,
 }

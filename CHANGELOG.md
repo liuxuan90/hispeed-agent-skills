@@ -1,5 +1,11 @@
 # Changelog
 
+## v1.3.0 — 2026-11-03
+
+- Default user-facing workbook, online-sheet, CSV-preview, and table-report presentation to Simplified Chinese.
+- Add stable Chinese worksheet names, headers, and status labels without changing canonical JSON keys, scoring model v1, or schema v2 business meaning.
+- Preserve names, emails, URLs, evidence quotations, product/model names, and English first-email drafts in their source language.
+
 ## v1.2.3 — 2026-11-03
 
 - Use the correct GitHub API media type when resolving the immutable stable commit.
