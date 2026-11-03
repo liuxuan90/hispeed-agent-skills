@@ -30,7 +30,7 @@
   "properties": {
     "lead_id": {"type": "string", "minLength": 1},
     "run_id": {"type": "string", "minLength": 1},
-    "skill_version": {"type": "string", "const": "1.2.0"},
+    "skill_version": {"type": "string", "const": "1.2.1"},
     "schema_version": {"type": "string", "const": "v2"},
     "company_identity": {
       "type": "object",

@@ -43,3 +43,7 @@
 - 增加从 GitHub `stable` 分支检查和安全更新 Skill 的脚本。
 - 更新前校验完整包并保留上一版本；激活失败时自动回滚。
 - 清理旧的 `hispeed-global-leads-research` Skill，今后只维护本 Skill。
+
+## v1.2.1 维护记录
+
+- 修复从没有发布清单的 v1.1.0 旧安装迁移时被误判为本地修改的问题。
