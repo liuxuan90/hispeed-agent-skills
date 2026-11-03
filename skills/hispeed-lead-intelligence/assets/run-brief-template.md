@@ -1,25 +1,24 @@
-# Lead research run brief
+# 客户研究任务简报
 
-- Run ID:
-- Country or market:
-- Market presence required: headquarters / manufacturing site / sales presence / other
-- Local language(s):
-- Narrow industry or application:
-- Customer type: distributor / system integrator / end manufacturer
-- Hispeed product or process focus:
-- Observable signals to prioritize:
-- Company-size or capability constraints:
-- Exclusions:
-- Known-customer or existing-lead list:
-- Known-customer list state: provided / user confirmed none / not provided
-- Target count:
-- Target count basis: candidates reviewed / qualified companies delivered
-- Output language:
-- Destination table or standalone package:
-- Authorized historical feedback source:
-- Email draft required: yes / no
-- Approved sender name / entity, or `NOT_PROVIDED`:
-- Technical email checks authorized and available:
-- Additional compliance or access constraints:
-
-
+- 批次编号：
+- 国家或市场：
+- 市场存在要求：总部 / 制造基地 / 销售存在 / 其他
+- 当地语言：
+- 细分行业或应用：
+- 客户类型：经销商 / 系统集成商 / 终端制造商
+- Hispeed产品或工艺重点：
+- 优先观察信号：
+- 企业规模或能力限制：
+- 排除条件：
+- 历史客户或已有线索名单：
+- 历史客户名单状态：已提供 / 用户确认不存在 / 未提供
+- 目标数量：
+- 目标数量口径：审核候选数 / 交付合格客户数
+- 用户可见表格语言：默认简体中文，除非明确指定其他语言
+- 开发信草稿语言：默认英文，除非明确指定其他语言
+- 目标在线表格或独立数据包：
+- 已授权的历史反馈来源：
+- 是否需要开发信草稿：是 / 否
+- 已批准的发件人姓名或主体；未提供时填写 `NOT_PROVIDED`：
+- 已授权且可用的邮箱技术检测：
+- 其他合规或访问限制：

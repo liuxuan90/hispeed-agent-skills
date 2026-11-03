@@ -1,31 +1,29 @@
-# Lead research run report
+# 客户研究运行报告
 
-- Run ID:
-- Skill version:
-- Company-record schema version:
-- Scoring model version:
-- Research date:
-- Requested count:
-- Target count basis:
-- Candidates discovered:
-- Candidates fully reviewed:
-- QUALIFIED:
-- REVIEW:
-- REJECTED:
-- DUPLICATE:
-- Research COMPLETE / PARTIAL:
-- Write status:
-- Records written successfully:
-- Destination:
-- Unavailable capabilities:
-- Query coverage summary:
-- Material evidence conflicts:
-- Human review required:
-- Downstream verification required:
-- Confirm sender signature required:
-- Draft presence check passed / failed:
-- Completeness blockers summary:
-- Quantity shortfall and reason:
-- Optimization observations:
-
-
+- 批次编号：
+- Skill版本：
+- 企业记录结构版本：
+- 评分模型版本：
+- 研究日期：
+- 目标数量：
+- 目标数量口径：
+- 发现候选企业数：
+- 完整审核企业数：
+- 合格（QUALIFIED）：
+- 待复核（REVIEW）：
+- 淘汰（REJECTED）：
+- 重复（DUPLICATE）：
+- 研究完整度（完整/部分完成）：
+- 写入状态：
+- 成功写入记录数：
+- 写入目标：
+- 不可用能力：
+- 搜索覆盖摘要：
+- 重大证据冲突：
+- 需要人工复核：
+- 需要下游验证：
+- 是否需要确认发件人签名：
+- 草稿完整性检查（通过/失败）：
+- 完整度阻塞项摘要：
+- 数量不足及原因：
+- 优化观察：
