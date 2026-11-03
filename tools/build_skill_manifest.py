@@ -38,8 +38,8 @@ payload = {
     "change_types": ["scripts", "workflow", "packaging"],
     "review_before_update": True,
     "release_notes": [
-        "Fix migration from a legacy v1.1.0 installation that has no release manifest.",
-        "Retain the v1.2 safe updater, one-Skill repository layout, and unchanged business rules."
+        "Pin the manifest and package archive to one immutable stable commit to prevent cache races.",
+        "Retain legacy v1.1.0 migration, rollback protection, and unchanged business rules."
     ],
     "files": files,
 }

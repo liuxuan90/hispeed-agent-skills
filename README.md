@@ -4,7 +4,7 @@ Public, reviewed Skill source for Hispeed Laser.
 
 ## Official Skill
 
-[`hispeed-lead-intelligence`](skills/hispeed-lead-intelligence/SKILL.md) is the only maintained customer-development Skill. Version **1.2.1** supports evidence-backed company discovery, company research, batch-specific ICP qualification, decision-relevant contact research, email-evidence classification, separate fit/contact/email conclusions, prioritization, a researched first-email draft, and structured handoff.
+[`hispeed-lead-intelligence`](skills/hispeed-lead-intelligence/SKILL.md) is the only maintained customer-development Skill. Version **1.2.2** supports evidence-backed company discovery, company research, batch-specific ICP qualification, decision-relevant contact research, email-evidence classification, separate fit/contact/email conclusions, prioritization, a researched first-email draft, and structured handoff.
 
 The Skill does not send campaigns, monitor replies, assign sales owners, or perform later-stage follow-up. Customer databases, contact exports, credentials, API keys, pricing, margin data, and internal sales records must never be committed here.
 

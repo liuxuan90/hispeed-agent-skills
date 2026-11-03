@@ -6,7 +6,7 @@ This example demonstrates structure, not a real prospect.
 {
   "lead_id": "exampleco.com",
   "run_id": "example-run",
-  "skill_version": "1.2.1",
+  "skill_version": "1.2.2",
   "schema_version": "v2",
   "company_identity": {
     "name": "Example Components Ltd.",

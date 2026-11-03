@@ -2,7 +2,7 @@
 name: hispeed-lead-intelligence
 description: Research and qualify evidence-backed industrial laser prospects for Hispeed Laser, or check and update this installed Skill from its reviewed stable release. Use for company discovery, fit investigation, decision-relevant contacts, email evidence, prioritization, researched first-email drafts, and explicit Skill maintenance requests. Do not use for sending campaigns, monitoring replies, assigning sales owners, or later-stage follow-up sequences.
 metadata:
-  version: 1.2.1
+  version: 1.2.2
 ---
 
 # Hispeed Lead Intelligence

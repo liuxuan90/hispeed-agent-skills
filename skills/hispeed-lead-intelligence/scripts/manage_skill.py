@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import base64
 import hashlib
 import json
 import os
@@ -61,9 +62,24 @@ def _fetch_bytes(url: str) -> bytes:
     return data
 
 
-def _remote_manifest() -> dict:
-    url = f"https://raw.githubusercontent.com/{REPO}/{REF}/{SOURCE_PATH}/{MANIFEST_NAME}"
+def _github_json(url: str) -> dict:
     return json.loads(_fetch_bytes(url).decode("utf-8"))
+
+
+def _stable_commit_sha() -> str:
+    payload = _github_json(f"https://api.github.com/repos/{REPO}/commits/{REF}")
+    sha = str(payload.get("sha", ""))
+    if not re.fullmatch(r"[0-9a-f]{40}", sha):
+        raise ValueError("GitHub did not return a valid stable commit")
+    return sha
+
+
+def _remote_manifest(commit_sha: str) -> dict:
+    url = f"https://api.github.com/repos/{REPO}/contents/{SOURCE_PATH}/{MANIFEST_NAME}?ref={commit_sha}"
+    payload = _github_json(url)
+    if payload.get("encoding") != "base64" or not isinstance(payload.get("content"), str):
+        raise ValueError("GitHub returned an unexpected manifest response")
+    return json.loads(base64.b64decode(payload["content"]).decode("utf-8"))
 
 
 def _validate_manifest(manifest: dict) -> None:
@@ -135,8 +151,8 @@ def _local_state(target: Path) -> tuple[str, list[str]]:
     return (match.group(1) if match else "legacy-unknown"), ["legacy install has no release manifest"]
 
 
-def _extract_remote_package(destination: Path) -> Path:
-    archive = _fetch_bytes(f"https://codeload.github.com/{REPO}/zip/refs/heads/{REF}")
+def _extract_remote_package(destination: Path, commit_sha: str) -> Path:
+    archive = _fetch_bytes(f"https://codeload.github.com/{REPO}/zip/{commit_sha}")
     archive_path = destination / "source.zip"
     archive_path.write_bytes(archive)
     output = destination / "extracted"
@@ -180,11 +196,12 @@ def _activate(staged: Path, target: Path, backup: Path, simulate_failure: bool =
         raise
 
 
-def _check(target: Path, remote: dict) -> int:
+def _check(target: Path, remote: dict, stable_sha: str) -> int:
     local_version, warnings = _local_state(target)
     remote_version = str(remote["version"])
     print(f"INSTALLED_VERSION: {local_version}")
     print(f"STABLE_VERSION: {remote_version}")
+    print(f"STABLE_COMMIT: {stable_sha}")
     for warning in warnings:
         print(f"LOCAL_WARNING: {warning}")
     if local_version in {"not-installed", "legacy-unknown"}:
@@ -207,6 +224,7 @@ def _check(target: Path, remote: dict) -> int:
 def _update(
     target: Path,
     remote: dict,
+    stable_sha: str,
     force: bool,
     allow_downgrade: bool,
     accept_reviewed_changes: bool,
@@ -235,7 +253,7 @@ def _update(
     backup_root = target.parent / ".hispeed-skill-backups"
     backup_root.mkdir(exist_ok=True)
     with tempfile.TemporaryDirectory(prefix="hispeed-skill-update-", dir=target.parent) as temporary:
-        staged = _extract_remote_package(Path(temporary))
+        staged = _extract_remote_package(Path(temporary), stable_sha)
         downloaded_manifest = _read_json(staged / MANIFEST_NAME)
         if downloaded_manifest != remote:
             raise ValueError("stable manifest changed while downloading; run the update again")
@@ -289,13 +307,15 @@ def main() -> int:
     try:
         if args.action == "self-test":
             return _self_test()
-        remote = _remote_manifest()
+        stable_sha = _stable_commit_sha()
+        remote = _remote_manifest(stable_sha)
         _validate_manifest(remote)
         if args.action == "check":
-            return _check(args.target, remote)
+            return _check(args.target, remote, stable_sha)
         return _update(
             args.target,
             remote,
+            stable_sha,
             args.force,
             args.allow_downgrade,
             args.accept_reviewed_changes,
