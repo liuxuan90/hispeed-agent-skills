@@ -47,10 +47,10 @@ def _read_json(path: Path) -> dict:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
-def _fetch_bytes(url: str) -> bytes:
+def _fetch_bytes(url: str, accept: str = "application/octet-stream") -> bytes:
     request = urllib.request.Request(
         url,
-        headers={"User-Agent": "Hispeed-Skill-Updater/1.2", "Accept": "application/octet-stream"},
+        headers={"User-Agent": "Hispeed-Skill-Updater/1.2", "Accept": accept},
     )
     with urllib.request.urlopen(request, timeout=30) as response:
         length = response.headers.get("Content-Length")
@@ -63,7 +63,7 @@ def _fetch_bytes(url: str) -> bytes:
 
 
 def _github_json(url: str) -> dict:
-    return json.loads(_fetch_bytes(url).decode("utf-8"))
+    return json.loads(_fetch_bytes(url, "application/vnd.github+json").decode("utf-8"))
 
 
 def _stable_commit_sha() -> str:

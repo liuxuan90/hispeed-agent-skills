@@ -1,6 +1,6 @@
 {
   "skill": "hispeed-lead-intelligence",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "source_repo": "liuxuan90/hispeed-agent-skills",
   "source_ref": "stable",
   "source_path": "skills/hispeed-lead-intelligence",
@@ -11,25 +11,25 @@
   ],
   "review_before_update": true,
   "release_notes": [
-    "Pin the manifest and package archive to one immutable stable commit to prevent cache races.",
-    "Retain legacy v1.1.0 migration, rollback protection, and unchanged business rules."
+    "Use the correct GitHub API media type when resolving the immutable stable commit.",
+    "Retain cache-race protection, legacy migration, rollback, and unchanged business rules."
   ],
   "files": {
     "agents/openai.yaml": "5861cbd89e1a661cac2ed613f0970dce193c328d555c17b6e0de910cb5f2078d",
-    "assets/company-record.schema.json": "b4b8dff5a24a3548f6d22c089a7c81678a6e9ad225fcf982b1a505fb4a6ad460",
+    "assets/company-record.schema.json": "4db4ccbc1b3407ae897739ad155b0f573480e98248b4ac775878b1fa824c7692",
     "assets/run-brief-template.md": "a1f6c79ddfc5f736f1e57a8fdd94c54ba91643e1ca248397a1ad9a699d514f41",
     "assets/run-report-template.md": "0cfb5f9ec135ad29b94fa8a5c8eef460a254b5fa2161c36b24818eb784ab4054",
     "assets/standalone-package-manifest.md": "eed92492625b3f829baa7d5389ce75b2d5c35b89ff886ade1ac8be68d7632ccc",
     "references/contact-email-policy.md": "6992464832f83ce11d5a84984fe288720c99e06428188590cdb6d4ecd92115f7",
     "references/evidence-policy.md": "a07f38c23010f6287202ded62ea3cd688c7416d483246463653e370a8eb3f8a3",
-    "references/example-record.md": "66c1a9e1316a3e1e3b2bc1968ac5a316166a722a7c509ce385afbcb5cdaa86d4",
+    "references/example-record.md": "8a34adb79f65726038201c04a9d84eda5c5deb837c3d297a3ae81a63c69b5b3c",
     "references/feedback-and-versioning.md": "73bd10699a201ce8449aa33a5e4a8ee28358c392ec17736807eccca1040934b5",
     "references/first-email-policy.md": "340536687bb609318cbc8efa1a4c71090bf7ce25c0f9e5f8d68518e21d8e8d6d",
     "references/hispeed-company-facts.md": "2c1c5e4321a4917a6998cc647146a74b949d8e948c3779776ec21101178fc14b",
-    "references/maintenance-zh.md": "7ca083b0145e409f08faca5dbf4d1593375daf4b372747983997bd526a888af9",
+    "references/maintenance-zh.md": "fddec2aa2dd200d811545d75711070b2559c00399f1d816a72c677b10fd8d240",
     "references/qualification-and-scoring.md": "7fd6fc9730cce1ac8e5b6028b9fe9f09614625dc9752a20c30eaa3685d2d49e9",
     "references/workbook-schema.md": "3d1034e0457a6d02f8ba943c817e279b2a594ddc25224c1108cc07da83ff6e8c",
-    "scripts/manage_skill.py": "8854cbb92f2742c49b8933b8d49e248cf8d527e85ef436719c4e00b75d97aaca",
-    "SKILL.md": "2d401a3e48f4faa1bbd66052b192c7233940976d4e4c4b95ab4f53248cf2f5a0"
+    "scripts/manage_skill.py": "1532a8a0ce547f46b991afc77fe4ba00e81f6a18f9b7430daf1c76d7b8d60eb4",
+    "SKILL.md": "b66a9a46803282c3f3b1aa1f1a47d9a403bbc413509fd91e9d592d5b6b53ef45"
   }
 }
