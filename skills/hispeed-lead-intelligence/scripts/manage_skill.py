@@ -217,7 +217,8 @@ def _update(
             "review the check output, then rerun with --accept-reviewed-changes"
         )
     local_version, warnings = _local_state(target)
-    if warnings and local_version not in {"not-installed", "legacy-unknown"} and not force:
+    legacy_without_manifest = warnings == ["legacy install has no release manifest"]
+    if warnings and not legacy_without_manifest and not force:
         raise ValueError("local Skill differs from its manifest; refusing to overwrite without --force")
     remote_version = str(remote["version"])
     if local_version not in {"not-installed", "legacy-unknown"}:

@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.2.1 — 2026-11-03
+
+- Fix migration from a legacy v1.1.0 installation that does not yet contain a release manifest.
+
 ## v1.2.0 — 2026-11-03
 
 - Retire and remove `hispeed-global-leads-research`.

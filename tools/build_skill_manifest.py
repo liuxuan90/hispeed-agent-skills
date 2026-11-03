@@ -38,10 +38,8 @@ payload = {
     "change_types": ["scripts", "workflow", "packaging"],
     "review_before_update": True,
     "release_notes": [
-        "Remove the retired hispeed-global-leads-research Skill and keep one official Skill.",
-        "Add explicit check and safe update commands against the reviewed stable branch.",
-        "Verify every packaged file, preserve the previous version, and roll back activation failures.",
-        "Keep lead qualification rules, scoring model v1, and company-record schema v2 unchanged."
+        "Fix migration from a legacy v1.1.0 installation that has no release manifest.",
+        "Retain the v1.2 safe updater, one-Skill repository layout, and unchanged business rules."
     ],
     "files": files,
 }
