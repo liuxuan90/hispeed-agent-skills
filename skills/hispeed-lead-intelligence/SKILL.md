@@ -1,8 +1,8 @@
 ---
 name: hispeed-lead-intelligence
-description: Research and qualify evidence-backed industrial laser prospects for Hispeed Laser. Use when a task asks to find target companies, investigate company fit, identify decision-relevant contacts, assess email evidence, prioritize leads, or draft a researched first cold email for one specified market segment. Do not use for sending campaigns, monitoring replies, assigning sales owners, or later-stage follow-up sequences.
+description: Research and qualify evidence-backed industrial laser prospects for Hispeed Laser, or check and update this installed Skill from its reviewed stable release. Use for company discovery, fit investigation, decision-relevant contacts, email evidence, prioritization, researched first-email drafts, and explicit Skill maintenance requests. Do not use for sending campaigns, monitoring replies, assigning sales owners, or later-stage follow-up sequences.
 metadata:
-  version: 1.1.0
+  version: 1.2.0
 ---
 
 # Hispeed Lead Intelligence
@@ -46,6 +46,17 @@ Additionally read:
 - [references/example-record.md](references/example-record.md) when calibrating a new implementation or reviewing output shape.
 
 For rule maintenance rather than lead research, read [references/maintenance-zh.md](references/maintenance-zh.md).
+
+## Check or update this Skill
+
+Do not modify the installation during ordinary lead research. Only run maintenance when the user explicitly asks to check or update the Hispeed Skill.
+
+- Check: run `python scripts/manage_skill.py check` from this Skill directory.
+- Update: first run `python scripts/manage_skill.py check`. For an ordinary rule release, run `python scripts/manage_skill.py update`. If the check reports `REVIEW_BEFORE_UPDATE: YES`, summarize the script, permission, dependency, or workflow changes first, then run `python scripts/manage_skill.py update --accept-reviewed-changes` when the requested update is within the user's authorization.
+- Stable source: `liuxuan90/hispeed-agent-skills`, branch `stable`, path `skills/hispeed-lead-intelligence`.
+- The updater verifies the release manifest and every packaged file, keeps a recoverable previous version outside the live Skill directory, and restores it if activation fails.
+- If the installed files have local modifications or untracked business files, stop instead of overwriting them. Never upload local customer data, credentials, sales records, or business files.
+- After a successful update, tell the user the installed version and whether the current Agent must start a new conversation or reload its Skill index.
 
 ## Run the research pipeline
 

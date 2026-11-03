@@ -1,35 +1,46 @@
-# Hispeed Skill Release & Maintenance SOP
+# Hispeed Skill release process
 
-## Roles
-- Marketing owner: approves targeting, contact and outreach changes.
-- Maintainer: reviews changes, updates rule files and manifest, tests on five representative sample companies.
-- Runtime operator: confirms the local agent reloads the updated rules; never supplies secrets in chat.
+## Source of truth
 
-## Initial publication
-1. Create private `liuxuan90/hispeed-agent-skills` repository. Upload this repository root (not just ZIP as a single file).
-2. Confirm the default `main` branch includes `SKILL.md`, updater, manifest and CSV headers.
-3. Create branch `stable` from the approved release commit. This is the rule update source configured in `config/update.json`.
-4. Install and authorize this skill **only** in the runtime that has read-only access to the repo.
-5. Smoke-test manual update and observe the `rules_version` in one research run.
+- Official Skill: `skills/hispeed-lead-intelligence/`
+- Development branch: `main`
+- Reviewed installation and update branch: `stable`
+- Version: `metadata.version` in `SKILL.md`
+- Package integrity: `release-manifest.json`
 
-## Publishing improved rules
-1. Edit **only** the relevant `references/*.md` files on a feature branch; PR to `main`.
-2. Validate English/Chinese marketing copy, source discipline, current channel exclusions, data schema, and legal compliance.
-3. Run `python -m unittest discover -s skills/hispeed-global-leads-research/tests -v`.
-4. Recalculate SHA-256 for every listed file and update `rules-manifest.json`, increasing `version` (e.g. 1.0.0 → 1.1.0). **Do not omit this step**, because the updater checks SHA-256.
-5. Compare before/after on a five-company evaluation batch using `references/evaluation.md`; record change in CHANGELOG.
-6. Merge approved PR into `main` and promote its vetted commit to `stable` (prefer protected branches and required reviews).
-7. Start the installed skill in a script-capable runtime, confirm it reports the new `rules_version`, and check report quality.
+No release may add customer lists, personal contact exports, credentials, API keys, internal prices, margins, sales records, or other business data.
 
-## What updates automatically
-- `references/*.md` only. The checked-in updater restricts the allowlist, verifies hashes, and keeps the last usable local files on errors.
-- `SKILL.md`, `scripts/*.py`, schema CSVs, and package metadata **do not auto-replace**; changes to these need a reviewed installer/redeployment or platform-supported skill update.
+## Prepare a release on `main`
+
+1. Make the smallest required change without changing approved business rules unless the owner approved that change.
+2. Select the semantic version: patch for compatible fixes, minor for compatible features/rule releases, major for incompatible behavior or schema changes.
+3. Update `metadata.version` and any schema/example constants that intentionally track it.
+4. Add a concise entry to `CHANGELOG.md`.
+5. Run `python tools/build_skill_manifest.py` after all Skill files are final.
+6. Validate the Skill and updater:
+   - `python -X utf8 %USERPROFILE%\.codex\skills\.system\skill-creator\scripts\quick_validate.py skills\hispeed-lead-intelligence`
+   - `python skills\hispeed-lead-intelligence\scripts\manage_skill.py self-test`
+   - verify the manifest checksums against the package.
+7. Scan the tracked files for secrets and prohibited business data.
+8. Commit normally to `main`; never rewrite published history.
+
+## Promote to `stable`
+
+1. Review the `main` commit and its diff, especially scripts, dependencies, permissions, schemas, and workflow changes.
+2. Promote the exact approved commit to `stable` through a pull request when branch protection is active.
+3. Tag the stable commit using the Skill version, for example `v1.2.0`.
+4. Run the updater's live `check` against GitHub and test an update in a temporary installation.
+5. Open the installed `SKILL.md`, confirm the version, and start a new Agent conversation for a load test.
+
+Ordinary Markdown rule changes still receive a semantic version and manifest refresh, but users update the existing installation in place; they do not uninstall or create a second version-named Skill folder.
 
 ## Rollback
-- Restore a prior known-good `stable` commit, with matching `rules-manifest.json` and rules, then invoke the skill again.
-- If offline, the cached local rules remain usable.
 
-## Security reminders
-- A SHA-256 manifest hosted in the **same repo** protects consistency/corruption, **not** a malicious repository maintainer. Only trusted reviewers may update `stable`; consider branch protection.
-- Private GitHub source needs `contents:read` at runtime; never embed PATs, customer data or credentials in this repository.
-- Changes must not expand the skill's permission to send marketing emails or collect sensitive data.
+- Local activation failure restores the previous installation automatically.
+- A successful update leaves the prior package under the sibling `.hispeed-skill-backups` directory (maximum three managed backups).
+- To roll back the public stable release, promote a reviewed corrective commit or prior known-good commit to `stable`, publish a new patch version when appropriate, and run the updater again.
+- Do not force-push or erase Git history to roll back.
+
+## Environment compatibility
+
+The bundled updater requires Python 3.10+, HTTPS access to public GitHub, and write permission to the installed Skill directory. Codex on this Windows device satisfies those requirements. Other Agents may use their native Skill manager instead; verify that environment's installation path, GitHub support, reload behavior, and script permission before updating.

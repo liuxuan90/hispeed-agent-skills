@@ -36,3 +36,10 @@
 - 旧v1记录不自动回写；需要迁移时另行人工批准。
 
 
+
+## v1.2.0 维护记录
+
+- 客户研究规则、评分权重和 schema v2 的业务字段不变。
+- 增加从 GitHub `stable` 分支检查和安全更新 Skill 的脚本。
+- 更新前校验完整包并保留上一版本；激活失败时自动回滚。
+- 清理旧的 `hispeed-global-leads-research` Skill，今后只维护本 Skill。
