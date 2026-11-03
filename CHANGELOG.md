@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.2.2 — 2026-11-03
+
+- Pin manifest and package downloads to the same immutable `stable` commit to avoid GitHub cache races.
+
 ## v1.2.1 — 2026-11-03
 
 - Fix migration from a legacy v1.1.0 installation that does not yet contain a release manifest.
