@@ -38,8 +38,8 @@ payload = {
     "change_types": ["scripts", "workflow", "packaging"],
     "review_before_update": True,
     "release_notes": [
-        "Pin the manifest and package archive to one immutable stable commit to prevent cache races.",
-        "Retain legacy v1.1.0 migration, rollback protection, and unchanged business rules."
+        "Use the correct GitHub API media type when resolving the immutable stable commit.",
+        "Retain cache-race protection, legacy migration, rollback, and unchanged business rules."
     ],
     "files": files,
 }

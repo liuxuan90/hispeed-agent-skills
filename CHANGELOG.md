@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.2.3 — 2026-11-03
+
+- Use the correct GitHub API media type when resolving the immutable stable commit.
+
 ## v1.2.2 — 2026-11-03
 
 - Pin manifest and package downloads to the same immutable `stable` commit to avoid GitHub cache races.
