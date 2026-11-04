@@ -38,8 +38,9 @@ payload = {
     "change_types": ["rules", "output-format"],
     "review_before_update": False,
     "release_notes": [
-        "Default user-facing workbook and table presentation to Simplified Chinese.",
-        "Keep canonical JSON keys, scoring model v1, schema v2 meaning, evidence text, identities, URLs, and English email drafts unchanged."
+        "Default to one Excel workbook or one online spreadsheet document containing the required Chinese worksheets.",
+        "Use the multi-file package only as an explicitly reported fallback when workbook creation is unavailable.",
+        "Keep qualification, scoring model v1, email evidence rules, schema v2 business meaning, and English first-email drafts unchanged."
     ],
     "files": files,
 }

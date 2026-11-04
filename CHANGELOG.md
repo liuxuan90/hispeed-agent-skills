@@ -1,5 +1,12 @@
 # Changelog
 
+## v1.3.1 — 2026-11-04
+
+- Default to one Excel workbook, or one online spreadsheet document, containing all required Chinese worksheets.
+- Do not silently split normal delivery into separate CSV, JSON, Markdown, or Excel files.
+- Add delivery checks for workbook count, worksheet completeness, Chinese headers, and cross-sheet `客户编号` linkage.
+- Keep the multi-file standalone package only as an explicitly reported fallback when workbook creation is unavailable.
+
 ## v1.3.0 — 2026-11-03
 
 - Default user-facing workbook, online-sheet, CSV-preview, and table-report presentation to Simplified Chinese.

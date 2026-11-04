@@ -1,6 +1,6 @@
 {
   "skill": "hispeed-lead-intelligence",
-  "version": "1.3.0",
+  "version": "1.3.1",
   "source_repo": "liuxuan90/hispeed-agent-skills",
   "source_ref": "stable",
   "source_path": "skills/hispeed-lead-intelligence",
@@ -10,25 +10,26 @@
   ],
   "review_before_update": false,
   "release_notes": [
-    "Default user-facing workbook and table presentation to Simplified Chinese.",
-    "Keep canonical JSON keys, scoring model v1, schema v2 meaning, evidence text, identities, URLs, and English email drafts unchanged."
+    "Default to one Excel workbook or one online spreadsheet document containing the required Chinese worksheets.",
+    "Use the multi-file package only as an explicitly reported fallback when workbook creation is unavailable.",
+    "Keep qualification, scoring model v1, email evidence rules, schema v2 business meaning, and English first-email drafts unchanged."
   ],
   "files": {
     "agents/openai.yaml": "5861cbd89e1a661cac2ed613f0970dce193c328d555c17b6e0de910cb5f2078d",
-    "assets/company-record.schema.json": "02f2264fe403f6c51da109415270e4a271ce174cd4941827947b5382211456cf",
-    "assets/run-brief-template.md": "9983bc2e8614f0e887ffc232536ecca2f2f7aaab426cb518de79e82d1ad66cd6",
-    "assets/run-report-template.md": "fa8e94579e03e5ce759499fc20c8c61fc9beebe287701d4991d1b94f6c665dc3",
-    "assets/standalone-package-manifest.md": "c8e32d98886d4431f9f2ec6ccb41e68fc5abd085aa672c51bdf3ad25e421bd56",
+    "assets/company-record.schema.json": "bba635decb57d52e58c59a4b2922a8a3f7cf8bdb6d1a453ab91d47c4cc1b387e",
+    "assets/run-brief-template.md": "a6ba10ecb74cbec95cca9bd70eb7233da23db80c54763d9716f898087dee8194",
+    "assets/run-report-template.md": "633d07a4fe4ca1f7f3f78253b63d03f276e77b8a1c042635ac8e38b05b6a2177",
+    "assets/standalone-package-manifest.md": "b12f0cf01344c6609c7d286664f9ae3802cb9b594aecb3937095583bfc9d4966",
     "references/contact-email-policy.md": "6992464832f83ce11d5a84984fe288720c99e06428188590cdb6d4ecd92115f7",
     "references/evidence-policy.md": "a07f38c23010f6287202ded62ea3cd688c7416d483246463653e370a8eb3f8a3",
-    "references/example-record.md": "1806c78cf6c220afdedb97091b972865d881e91eb53f643e340fff58960565c4",
+    "references/example-record.md": "353450d014e63ba81edf0047be0c5c52f6d7423fa94c4ff4e0c4194c621404b8",
     "references/feedback-and-versioning.md": "73bd10699a201ce8449aa33a5e4a8ee28358c392ec17736807eccca1040934b5",
     "references/first-email-policy.md": "340536687bb609318cbc8efa1a4c71090bf7ce25c0f9e5f8d68518e21d8e8d6d",
     "references/hispeed-company-facts.md": "2c1c5e4321a4917a6998cc647146a74b949d8e948c3779776ec21101178fc14b",
-    "references/maintenance-zh.md": "0f8bb42c14cd4b8186ee637cae7a82809566be5dbc94572d9f28efc7a0c982f9",
+    "references/maintenance-zh.md": "da4091a5752a375ae8d4fce3ff4b7a1138c72163fd2370ade06f91f1f77116f1",
     "references/qualification-and-scoring.md": "7fd6fc9730cce1ac8e5b6028b9fe9f09614625dc9752a20c30eaa3685d2d49e9",
-    "references/workbook-schema.md": "dbfbd4c16d6d1fba263dd46efe3d245622ab829cc2638adc6526149a0dc33149",
+    "references/workbook-schema.md": "b6198e2897bb97e7b43f363f165c40b766662f9bb636f5e8f642e50771f82629",
     "scripts/manage_skill.py": "1532a8a0ce547f46b991afc77fe4ba00e81f6a18f9b7430daf1c76d7b8d60eb4",
-    "SKILL.md": "fb10e74f1f47e330cd972f1c2b135a24dd6c6afb117727607965d2917a5799ff"
+    "SKILL.md": "8ef07eb265993152fb661c03f462ea540d35457ceacb01a551d318d76a24a50f"
   }
 }
