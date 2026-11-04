@@ -2,7 +2,7 @@
 name: hispeed-lead-intelligence
 description: Research and qualify evidence-backed industrial laser prospects for Hispeed Laser, or check and update this installed Skill from its reviewed stable release. Use for company discovery, fit investigation, decision-relevant contacts, email evidence, prioritization, researched first-email drafts, and explicit Skill maintenance requests. Do not use for sending campaigns, monitoring replies, assigning sales owners, or later-stage follow-up sequences.
 metadata:
-  version: 1.3.0
+  version: 1.3.1
 ---
 
 # Hispeed Lead Intelligence
@@ -21,7 +21,7 @@ Require these inputs before discovery:
 - target count basis: candidates reviewed or qualified companies delivered;
 - exclusions and known-customer list;
 - output language; default the user-facing workbook/table package to Simplified Chinese unless the run brief explicitly requests another language;
-- destination table or an explicit request for a standalone data package.
+- destination table or an explicit request for a standalone data package. When no destination is supplied, default to one Excel workbook rather than multiple independent files.
 
 Use [assets/run-brief-template.md](assets/run-brief-template.md). Ask only for missing decisions; find public facts yourself. Never broaden the segment to meet the requested count.
 
@@ -98,7 +98,9 @@ Ground the problem in evidence and use exploratory language for inference. Produ
 
 Use normalized company domain as the primary identity key, with legal name, country, and company LinkedIn as secondary signals. Update an existing record rather than duplicating it. Preserve human scores, sales ownership, follow-up status, notes, and conflicting values. If destination access or schema mapping is uncertain, return a standard data package instead of guessing a write.
 
-For Excel, online spreadsheets, CSV previews, and table-style reports, follow the Chinese presentation mapping in [references/workbook-schema.md](references/workbook-schema.md). By default, use Chinese worksheet names, titles, column headers, status explanations, rationales, blockers, and next actions. Preserve company and person names, emails, URLs, evidence quotations, product/model names, and the English first-email draft in their source language. Keep canonical English JSON keys and status codes in machine-readable records when downstream automation depends on them.
+For Excel and online spreadsheets, follow [references/workbook-schema.md](references/workbook-schema.md) and deliver one workbook or one online spreadsheet document containing the required Chinese worksheets. Do not split the normal user-facing delivery into separate CSV, JSON, Markdown, or Excel files. Use Chinese worksheet names, titles, column headers, status explanations, rationales, blockers, and next actions. Preserve company and person names, emails, URLs, evidence quotations, product/model names, and the English first-email draft in their source language. Keep canonical English JSON keys and status codes in machine-readable records when downstream automation depends on them.
+
+If the environment cannot create or write a workbook, state that limitation before delivery and use the fallback package in [assets/standalone-package-manifest.md](assets/standalone-package-manifest.md). Do not silently substitute multiple files for the requested workbook. Before delivery, verify that there is exactly one workbook, the required worksheets exist, user-facing headers are Chinese, and `客户编号` links each delivered company across worksheets.
 
 ### 9. Report the run
 

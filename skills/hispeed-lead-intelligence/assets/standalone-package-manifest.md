@@ -1,6 +1,8 @@
-# Standalone lead research package
+# Fallback standalone lead research package
 
-Use this layout when no online table is supplied:
+This is a fallback, not the default delivery. When no online table is supplied and the environment can create Excel files, deliver one `.xlsx` workbook containing the Chinese worksheets defined in `references/workbook-schema.md`.
+
+Use the multi-file layout below only when the environment cannot create or write a workbook. State the limitation before delivery; never silently replace the workbook with separate files.
 
 ```text
 <run-id>/
